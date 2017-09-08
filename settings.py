@@ -3,7 +3,7 @@
 settings = {
     "DB": {
         "user": "root",
-        "password": "root",
+        "password": "",
         "host": "localhost",
         "database": "twitter_news"
     },
