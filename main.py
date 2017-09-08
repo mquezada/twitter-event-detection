@@ -105,11 +105,11 @@ if __name__ == "__main__":
     args = docopt(__doc__)
 
     if args['--debug']:
-        logging.basicConfig(format='%(asctime)s - %(name)s : %(message)s',
+        logging.basicConfig(format='%(asctime)s - %(level)s - %(name)s : %(message)s',
                             level=logging.DEBUG,
                             datefmt='%d-%m-%Y %H:%M:%S %Z')
     else:
-        logging.basicConfig(format='%(asctime)s - %(name)s : %(message)s',
+        logging.basicConfig(format='%(asctime)s - %(level)s - %(name)s : %(message)s',
                             level=logging.INFO,
                             datefmt='%d-%m-%Y %H:%M:%S %Z')
         logging.Formatter.converter = time.gmtime
