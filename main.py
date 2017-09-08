@@ -24,7 +24,9 @@ import logging
 import time
 
 logger = logging.getLogger(__name__)
-minute = 60
+second = 1
+minute = 60 * second
+hour = 60 * minute
 
 
 def main():
@@ -91,9 +93,7 @@ def main():
     keyword_sets = list(zip(keyword_sets, map(lambda x: x.id, events)))
 
     # collect tweet sets per keyword set for 1 hour
-    print(keyword_sets)
-
-    collect_tweets(keyword_sets, limit=5 * minute)
+    collect_tweets(keyword_sets, limit=1 * minute)
 
     return keywords, headlines
 
