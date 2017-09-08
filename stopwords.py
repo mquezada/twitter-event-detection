@@ -180,14 +180,16 @@ more_words = [
     "via",
     "ndtv",
     "tweet",
-    "tweets"
+    "tweets",
 ]
 
 # palabras nuevas (2017)
 more_more_words = [
     '’s',
     "'s",
-    'bbcpapers'
+    'bbcpapers',
+    'edition',
+    
 ]
 
 stopwords += more_words + more_more_words
