@@ -1,13 +1,15 @@
+from collections import namedtuple
+from datetime import datetime
+
 from sqlalchemy import Column, Integer, String, DateTime, BigInteger, Boolean, Text
 from sqlalchemy.ext.declarative import declarative_base
-
-from datetime import datetime
 
 TWEET = 'tweet_2017'
 EVENT = 'event_2017'
 USER = 'user_2017'
 EVENT_TWEET = 'event_tweet_2017'
 
+tweet_tuple = namedtuple('tweet_tuple', ['tweet', 'is_headline', 'event_id'])
 Base = declarative_base()
 
 

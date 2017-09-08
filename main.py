@@ -9,19 +9,20 @@ Options:
   -h --help       Show this screen.
 """
 
+import logging
+import time
+from contextlib import closing
+from datetime import datetime, timedelta
+
+from docopt import docopt
+
+from clean_tweets import Tokenizer
+from db_api import get_saver, SessionPool
+from detect_keywords import detect_keywords
+from models import Event, tweet_tuple
 from settings import settings
 from twitter_api import get_latest_tweets, get_api, is_retweet, collect_tweets
 from twitter_keys import keys
-from db_api import get_saver, SessionPool
-from detect_keywords import detect_keywords
-from docopt import docopt
-from clean_tweets import Tokenizer
-from models import Event
-
-from contextlib import closing
-from datetime import datetime, timedelta
-import logging
-import time
 
 logger = logging.getLogger(__name__)
 second = 1
@@ -62,7 +63,7 @@ def main():
                     text = tweet.retweeted_status.text
 
                 headlines.append(text)
-                saver.send((tweet, True, None))
+                saver.send(tweet_tuple(tweet=tweet, is_headline=True, event_id=None))
 
     headlines_preprocessed = []
     for headline in headlines:
@@ -96,7 +97,10 @@ def main():
     keyword_sets = list(zip(keyword_sets, map(lambda x: x.id, events)))
 
     # collect tweet sets per keyword set for 1 hour
-    collect_tweets(keyword_sets, limit=1 * hour)
+    total_time = 1 * hour
+
+    logger.info(f"Collecting tweets for {total_time / 60} minutes.")
+    collect_tweets(keyword_sets, limit=total_time)
 
     return keywords, headlines
 
@@ -115,4 +119,7 @@ if __name__ == "__main__":
         logging.Formatter.converter = time.gmtime
 
     kwd, hdl = main()
-    logging.info("DONE")
+    logger.info("DONE")
+
+    # start: 08-09-2017 22:46:01 GMT (1 hour)
+    # headlines donde: 08-09-2017 22:47:36 GMT (total: 1.5 minutes)

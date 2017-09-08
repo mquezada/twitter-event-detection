@@ -1,9 +1,11 @@
-from db_api import get_saver, SessionPool
-import tweepy
 import logging
-from twitter_keys import keys
 import time
 
+import tweepy
+
+from db_api import get_saver, SessionPool
+from models import tweet_tuple
+from twitter_keys import keys
 
 logger = logging.getLogger(__name__)
 
@@ -58,7 +60,7 @@ class MyStreamListener(tweepy.StreamListener):
             return False
 
         logger.debug('"' + ' '.join(status.text.split()) + '"')
-        self.saver.send((status, False, self.event_id))
+        self.saver.send(tweet_tuple(tweet=status, is_headline=False, event_id=self.event_id))
 
     def on_error(self, status_code):
         logger.error(f'(Stream {self.id}) Error. Status code: {status_code}')
@@ -88,7 +90,7 @@ def collect_tweets(keyword_event_sets, limit=60*60):
         logger.info(f"Starting stream {i}")
 
         session = session_pool.get_session()
-        saver = get_saver(session, buffer_size=4096)
+        saver = get_saver(session)
         stream_listener = MyStreamListener(saver, stream_id=i, keywords=keywords, event_id=event_id, limit=limit)
 
         key = keys[i]

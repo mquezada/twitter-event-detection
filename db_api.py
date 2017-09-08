@@ -1,14 +1,14 @@
-from models import Tweet, User, Event, EventTweet
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker, scoped_session
-from settings import settings
-from docopt import docopt
-from models import Base
 import json
-import arrow
 import logging
-from threading import Lock
 
+import arrow
+from docopt import docopt
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from models import Base
+from models import Tweet, User, EventTweet
+from settings import settings
 
 """
 database charset
@@ -54,7 +54,7 @@ class SessionPool:
         return self.Session()
 
 
-def get_saver(session, buffer_size=100):
+def get_saver(session, buffer_size=2**16):
     buffer = []
     closed = False
 
