@@ -27,6 +27,7 @@ settings = {
                       'bbcnewsasia',
                       'bbcworld',
                       'bostonglobe',
+                      'bpolitics',
                       'breaking911',
                       'breakingnews',
                       'breakingnewsuk',
