@@ -115,3 +115,4 @@ if __name__ == "__main__":
         logging.Formatter.converter = time.gmtime
 
     kwd, hdl = main()
+    logging.info("DONE")
