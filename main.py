@@ -53,7 +53,10 @@ def main():
         saver.send(None)
 
         for screen_name in news_accounts:
-            for tweet in get_latest_tweets(screen_name, one_hour_before, api):
+            news_sources_tweets = get_latest_tweets(screen_name, one_hour_before, api)
+            if not news_sources_tweets:
+                continue
+            for tweet in news_sources_tweets:
                 text = tweet.text
                 if is_retweet(tweet):
                     text = tweet.retweeted_status.text

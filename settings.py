@@ -25,7 +25,6 @@ settings = {
                       'bbcmundo_ultimo',
                       'bbcnews',
                       'bbcnewsasia',
-                      'bbcnewus',
                       'bbcworld',
                       'bloombergnews',
                       'bostonglobe',

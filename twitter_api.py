@@ -24,7 +24,11 @@ def get_user(screen_names, api):
 
 def get_latest_tweets(screen_name, since_timestamp, api):
     # get latest tweets (max api count is 200)
-    tweets = api.user_timeline(screen_name=screen_name, count=200)
+    try:
+        tweets = api.user_timeline(screen_name=screen_name, count=200)
+    except tweepy.error.TweepError:
+        logger.warning(f"User {screen_name} does not exist.")
+        return None
     for tweet in tweets:
         if tweet.created_at >= since_timestamp:
             yield tweet
