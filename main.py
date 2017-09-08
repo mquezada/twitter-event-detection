@@ -96,7 +96,7 @@ def main():
     keyword_sets = list(zip(keyword_sets, map(lambda x: x.id, events)))
 
     # collect tweet sets per keyword set for 1 hour
-    collect_tweets(keyword_sets, limit=1 * minute)
+    collect_tweets(keyword_sets, limit=1 * hour)
 
     return keywords, headlines
 
