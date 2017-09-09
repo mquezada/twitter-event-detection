@@ -122,4 +122,5 @@ if __name__ == "__main__":
     logger.info("DONE")
 
     # start: 08-09-2017 22:46:01 GMT (1 hour)
-    # headlines donde: 08-09-2017 22:47:36 GMT (total: 1.5 minutes)
+    # headlines done: 08-09-2017 22:47:36 GMT (total: 1.5 minutes)
+    # collection end: 09-09-2017 00:00:25 GMT - INFO - root : DONE
