@@ -25,6 +25,8 @@ class Tokenizer:
                     or not allow_urls and token.like_url \
                     or token.pos_ == 'PUNCT' \
                     or token.is_punct \
+                    or token.is_space \
+                    or not token.is_alpha \
                     or token.text.startswith(('@', 'ZZZPLACEHOLDERZZZ')) \
                     or token.ent_type_ not in allowed_entities:
                 if tokens:

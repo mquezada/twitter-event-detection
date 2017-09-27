@@ -60,7 +60,8 @@ class MyStreamListener(tweepy.StreamListener):
             return False
 
         logger.debug('"' + ' '.join(status.text.split()) + '"')
-        self.saver.send(tweet_tuple(tweet=status, is_headline=False, event_id=self.event_id))
+        if status:
+            self.saver.send(tweet_tuple(tweet=status, is_headline=False, event_id=self.event_id))
 
     def on_error(self, status_code):
         logger.error(f'(Stream {self.id}) Error. Status code: {status_code}')

@@ -62,6 +62,9 @@ def get_saver(session, buffer_size=2**16):
         try:
             t, is_headline, event_id = (yield)
 
+            if not t:
+                continue
+
             quoted_status_id = None
             if t.is_quote_status:  # has quote
                 if getattr(t, 'quoted_status', None):
